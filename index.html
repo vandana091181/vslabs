@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div class="nav-container">
+    <div class="navbar-fixed">
+      <nav class="black">
+        <div class="nav-wrapper">
+          <div class="container">
+            <span href="#" class="brand-logo left light-green-text vsharma"><i
+                class="large material-icons">import_contacts</i>vSharma</span><span class="brand-logo labs">Labs</span>
+            <ul id="nav-mobile" class="right hide-on-small-and-down">
+              <li>
+                <a href="#" class="btn-large light-green-text black active">Home</a>
+              </li>
+              <li>
+                <a class="dropdown-button btn-large black light-green-text" data-activates="my-dropdown"
+                  href="#!">Projects
+                  <i class="material-icons right" style="margin: 0px;">arrow_drop_down</i>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="btn-large light-green-text black">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <ul id="my-dropdown" class="dropdown-content">
+        <li>
+          <a href="#" class="light-green-text">MLOps</a>
+        </li>
+        <li>
+          <a href="#" class="light-green-text">Data Engineering</a>
+        </li>
+        <li>
+          <a href="#" class="light-green-text">Video Platform</a>
+        </li>
+        <li>
+          <a href="#" class="light-green-text">Web Development</a>
+        </li>
+      </ul>
+    </div>
+    <div class="header">
+      <h5 class="center light-green-text">
+        Fullstack freelance consulting and development services
+      </h5>
+    </div>
+  </div>
+
+  <section class="section section-main">
+    <div class="container">
+      <!-- Row 1 -->
+      <div class="row row-1">
+        <div class="col m6 hide-on-small-only">
+          <div class="img-content">
+            <h3>MLOps</h3>
+            <p>
+              Automate your machine learning pipelines on cloud and make them production ready. Continuos ingestion on
+              new
+              data in these pipelines helps models to learn changing cutomer behavior faster and making smart
+              predictions
+              for better customer enggagement</p>
+          </div>
+        </div>
+        <div class="col m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/gallery/mlops2.png" alt="">
+              <!-- <span class="card-title">ML Ops</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="row row-2">
+        <div class="col m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/gallery/deg.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col m6 hide-on-small-only">
+          <div class="img-content">
+            <h3>Data Engineering</h3>
+            Build robust data handling pipelines on AWS with spark glue jobs to handle data at scale. Leverage the
+            power of contaninerized clusters on cloud to run your ETL jobs and pre clean quality data for analytics
+            and machine learning workloads
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="row row-3">
+        <div class="col m6 hide-on-small-only">
+          <div class="img-content">
+            <h3>Video Platforms</h3>
+            Build video platform for EdTech and eConnect platforms at scale with thousands watching video content via
+            online classes or other eConnect channels.
+          </div>
+        </div>
+        <div class="col m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/gallery/vdo.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="row row-2">
+        <div class="col m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/gallery/web3.png" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col m6 hide-on-small-only">
+          <div class="img-content">
+            <h3>Web Development</h3>
+            Modernize your websites with latest web development frameworks from react, angular, vue and many otherns.
+            Create fullstack responsive webapps and scale them on cloud.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+<script>
+  $(document).ready(function () {
+    //alert('load')
+    $('.dropdown-button').dropdown({
+      constrainWidth: false,
+      hover: true,
+      belowOrigin: true,
+      alignment: 'left'
+    });
+  });
+</script>
+
+</html>

@@ -1,0 +1,19 @@
+.nav-container {
+  background: black;
+  color: white;
+  padding-bottom: 10px; }
+
+.card-image img {
+  height: 250px;
+  width: 250px; }
+
+nav .brand-logo i.material-icons {
+  margin-right: 0px; }
+
+nav span.labs {
+  left: 25%; 
+}
+
+ul#my-dropdown {
+  background-color: black;
+}
