@@ -11,62 +11,51 @@ nav .brand-logo i.material-icons {
   margin-right: 0px; }
 
 nav span.labs {
-  left: 25%; 
-}
+  left: 25%; }
 
 ul#my-dropdown {
-  background-color: black;
-}
+  background-color: black; }
 
 .ptop-10 {
-  padding-top: 10px;
-}
+  padding-top: 10px; }
 
 .mtop-10 {
-  margin-top: 10px;
-}
+  margin-top: 10px; }
+
 .mtop-20 {
-  margin-top: 20px;
-}
+  margin-top: 20px; }
+
 .f3rem {
-  font-size: 1.3rem;
-}
+  font-size: 1.3rem; }
 
 .img-content {
-  font-size: 1.19rem;
-}
-
+  font-size: 1.19rem; }
 
 body > section > div > div:nth-child(2) > ul > li,
 body > section > div > div:nth-child(2) > div:nth-child(4) > ul > li,
 body > section > div > div:nth-child(2) > div:nth-child(4) > ul:nth-child(20) > li,
-body > section > div > div:nth-child(2) > div:nth-child(4) > ul:nth-child(24) > li {
+body > section > div > div:nth-child(2) > div:nth-child(4) > ul:nth-child(24) > li,
+body > section > div > div:nth-child(2) > div:nth-child(4) > div.mtop-20.f3rem > ul > li {
   list-style-type: disc;
-  padding: 5px;
-}
+  padding: 5px; }
 
 .mlo-sample-img > img {
-  width: 70%;
-}
+  width: 70%; }
 
 .img50p > img {
-  width: 47%
-}
+  width: 47%; }
 
-h4, h5{
-  font-weight: bold;
-}
+h4, h5 {
+  font-weight: bold; }
 
 p {
   font-size: 1.3rem;
-  margin-top: 10px;
-}
+  margin-top: 10px; }
 
 .code-cont {
   overflow-y: scroll;
   width: 800px;
-  height: 300px;
-}
+  height: 300px; }
 
 .code-cont > pre > code {
   display: block;
@@ -76,5 +65,4 @@ p {
   overflow-x: scroll;
   max-width: 100%;
   min-width: 100px;
-  padding: 0;
-}
+  padding: 0; }

@@ -139,7 +139,20 @@
           <div class="mlo-sample-img mtop-10">
             <img src="img/mlo/pipeline.png" alt="">
           </div>
-          <ul class="f3rem">
+          <div class="mtop-20 f3rem">Built with <a href="https://aws.amazon.com/?nc2=h_lg">AWS</a> cloud
+            native constructs which includes:
+            <ul>
+              <li><a href="https://aws.amazon.com/s3/" target="_blank">S3, </a></li>
+              <li><a href="https://aws.amazon.com/cognito/" target="_blank">Cognito, </a></li>
+              <li><a href="https://aws.amazon.com/api-gateway/" target="_blank">API Gateway, </a></li>
+              <li><a href="https://aws.amazon.com/lambda/" target="_blank">Lambda Functions, </a></li>
+              <li><a href="https://aws.amazon.com/dynamodb/" target="_blank">Dynamodb, </a></li>
+              <li><a href="https://aws.amazon.com/sagemaker/" target="_blank">SageMaker, </a></li>
+              <li><a href="https://aws.amazon.com/step-functions/" target="_blank">Step Functions, </a></li>
+              <li><a href="https://aws.amazon.com/cloudformation/" target="_blank">Cloud Formation </a></li>
+            </ul>
+          </div>
+          <ul class="f3rem" style="display: none;">
             <li>Built with AWS server less cloud native contructs</li>
             <li>Uses AWS S3 bucket static website for hosting and serving application dashboard</li>
             <li>Uses AWS Cognito for user authentication and authorzation</li>
@@ -302,7 +315,7 @@ TrainModelStateMachine:
           <h5 class="mtop-20">Conclusion</h5>
           <p>In this article we saw how cloud services can be efficiently used to automate MLOps workflows. We can
             easily build & scale ML workflows and we can as reuse the same architechture for some other computer vision
-            workflow. The scalability and reusablity this architecture can be attributed to following:</p>
+            workflow. The scalability and reusablity of this architecture can be attributed to following:</p>
           <ul class="f3rem">
             <li>Segregation of task & responsibilities and using right services for right jobs</li>
             <li>Sagemaker does the ML heavy lifting</li>
