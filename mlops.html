@@ -15,6 +15,17 @@
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+<script>
+  $(document).ready(function () {
+    //alert('load')
+    $('.dropdown-button').dropdown({
+      constrainWidth: false,
+      hover: true,
+      belowOrigin: true,
+      alignment: 'left'
+    });
+  });
+</script>
 
 <body>
   <div class="nav-container">
@@ -64,21 +75,250 @@
   </div>
 
   <section>
-    <div class="sec-container container">
-      <h1>Welcome to MLOps</h1>
+    <div class="sec-container col">
+      <div class="container">
+        <h4>Automate computer vision model's train and inference pipeline</h4>
+      </div>
+      <div class="container">
+        <p class="mtop-10 f3rem">In this blog we’ll learn how to automate the training and inference pipeline of a
+          computer
+          vision model which is used to detect vehicles in the images. Following are some key requirements for this
+          MLOps pipeline:
+        </p>
+        <ul class="f3rem">
+          <li>Should leverage the existing <a
+              href="https://docs.aws.amazon.com/sagemaker/latest/dg/image-classification.html" target="_blank">MXNet
+              image
+              classification model</a> and apply transfer learning
+            on the data
+            provided for this use case</li>
+          <li>Should focus more on pipeline automation for retraining the model on new data and deploying the model
+            for inferencing by downstream consumers</li>
+          <li>Should have a user-friendly dashboard to execute training and inference workflows. Dashboard should report
+            the models train and inference accuracy metrics and should maintain audit trail of model training instances
+          </li>
+          <li>Should be built with cloud native constructs avoiding dependencies on local packages and popular machine
+            learning frameworks </li>
+        </ul>
+
+        <div class="mlo-sample-img">
+          <img src="img/mlo/sample-img.png" alt="">
+        </div>
+
+        <div>
+          <h4>Dashboard Features</h4>
+          <p class="f3rem">Following section will describe some dashboard feature w.r.t train and inference workflows.
+            It will
+            also
+            cover the the model accuracy & audit trail report and application meta data interaction</p>
+          <h5>Inference flow to detect vehicles</h5>
+          <p class="f3rem mtop-10">
+            Users can upload the image from "Detect" tab and the inference would be run at cloud gateway api executing a
+            SageMaker deployed endpoint.
+          </p>
+          <div class="img50p">
+            <img src="img/mlo/vda.png" alt="">
+            <img src="img/mlo/nvda.png" alt="" style="margin-left:20px;">
+          </div>
+          <h5 class="mtop10">Retrain, model accuracy and train audit trail</h5>
+          <p class="f3rem">"Retrain" tab on dashboard allows single click model training using meta data
+            entered in "Settings" tab. Model to be trained in cloud with AWS Sagemaker runtime and will be deployed as
+            an end point available for inference. History of model
+            training events along with their accuracy numbers can also be
+            seen here.</p>
+          <div class="mlo-sample-img">
+            <img src="img/mlo/retrain.png" alt="">
+            <img src="img/mlo/settings.png" alt="" class="mtop-10">
+          </div>
+          <h4 class="mtop-10">Pipeline Architecture & Design</h4>
+          <p>As mentioned above both the train and inference workflows can be easily excuted from the application
+            dashboard. Following section will describe about the pipeline architecture and native constructs used to
+            build it. All the source code is available <a href="https://github.com/vandana091181/vslabs.git"
+              target="blank">here</a>. Following are the key highlights of the pipeline:
+          </p>
+          <div class="mlo-sample-img mtop-10">
+            <img src="img/mlo/pipeline.png" alt="">
+          </div>
+          <ul class="f3rem">
+            <li>Built with AWS server less cloud native contructs</li>
+            <li>Uses AWS S3 bucket static website for hosting and serving application dashboard</li>
+            <li>Uses AWS Cognito for user authentication and authorzation</li>
+            <li>Uses AWS API Gateway for REST middleware</li>
+            <li>Uses AWS Lambda functions for server less backend</li>
+            <li>Uses AWS Dynamodb for data storage</li>
+            <li>Uses AWS SageMaker for model training and deployment</li>
+            <li>Uses AWS Step functions for pipline orchestration</li>
+            <li>Uses AWS Cloud formation for composing and commisioning all the componnents mentioned above</li>
+          </ul>
+          <p>Following <a href="https://github.com/vandana091181/vda/blob/main/code/server/vda.template"
+              target="blank">cloud
+              formation
+              template</a> create/update/delete all the necessary cloud components based on any changes applied
+            to the pipeline infrastructure</p>
+          <div class="code-cont">
+
+            <pre>
+            <code>Transform: "AWS::Serverless-2016-10-31"
+Description: Vehicle detection mlops backend
+
+Globals:
+Api:
+  Cors:
+    AllowMethods: "'GET,POST,OPTIONS'"
+    AllowHeaders: "'*'"
+    AllowOrigin: "'*'"
+  Auth:
+    AddDefaultAuthorizerToCorsPreflight: False
+  GatewayResponses: 
+    DEFAULT_4XX:
+      ResponseParameters:
+        Headers:
+          Access-Control-Allow-Origin: "'*'"
+          Access-Control-Allow-Methods: "'OPTIONS,GET,PUT'"
+          Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+    DEFAULT_5XX:
+      ResponseParameters:
+        Headers:
+          Access-Control-Allow-Origin: "'*'"
+          Access-Control-Allow-Methods: "'OPTIONS,GET,PUT'"
+          Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+Function:
+  Runtime: python3.8
+  Timeout: 30
+  MemorySize: 128
+
+Resources:
+AppMetaFunction:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/meta.get_meta
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+    Events:
+      Api:
+        Type: Api
+        Properties:
+          Path: /meta
+          Method: GET
+GetS3PresignedUrl:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/meta.get_s3_upload_ps_url
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+    Events:
+      Api:
+        Type: Api
+        Properties:
+          Path: /s3ps
+          Method: GET 
+RunTrainModelStateMachine:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/train.execute_train_state_machine
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+    Events:
+      Api:
+        Type: Api
+        Properties:
+          Path: /train
+          Method: PUT 
+TrainModel:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/train.train
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+DetectMask:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/inference.detect_vehicle
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+    Events:
+      Api:
+        Type: Api
+        Properties:
+          Path: /detect
+          Method: GET
+CheckTrainStatus:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/check_status.check_train_status
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+CheckDeploymentStatus:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/check_status.check_deplyment_status
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+DeployModel:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: src/deploy.deploy
+    Description: A function that gets app meta
+    Role: '{{resolve:ssm:/vda/iam/lambdarole:1}}'
+TrainModelStateMachine:
+  Type: "AWS::StepFunctions::StateMachine"
+  Properties:
+    StateMachineName: TrainModel
+    DefinitionS3Location: src/state-machine-def.json
+    DefinitionSubstitutions:
+      TrainModelArn: !GetAtt TrainModel.Arn
+      CheckTrainStatusArn: !GetAtt CheckTrainStatus.Arn
+      DeployModelArn: !GetAtt DeployModel.Arn
+      CheckDeploymentArn: !GetAtt CheckDeploymentStatus.Arn
+    RoleArn: '{{resolve:ssm:/vda/iam/sfrole:1}}'                
+            </code>
+          </pre>
+          </div>
+          <p class="mtop-20">Following <a
+              href="https://github.com/vandana091181/vda/blob/main/code/server/src/state-machine-def.json"
+              target="blank">state
+              machine </a> orchestrates the train pipeline workflow</p>
+          <div class="mlo-sample-img mtop-10">
+            <img src="img/mlo/state_machine.png" alt="">
+          </div>
+          <p clas="mtop-20">List of all REST Api's created in API Gateway</p>
+          <div class="mlo-sample-img mtop-10">
+            <img src="img/mlo/apig.png" alt="">
+          </div>
+          <p clas="mtop-20">List of all serveless lambda functions, use following from the list:</p>
+          <ul class="f3rem">
+            <li><a href="https://github.com/vandana091181/vda/blob/main/code/server/src/train.py" target="blank">
+                TrainModel</a> lambda function to train the model</li>
+            <li><a href="https://github.com/vandana091181/vda/blob/main/code/server/src/inference.py" target="blank">
+                DetectVehicle</a> lambda function to infer model</li>
+            <li><a href="https://github.com/vandana091181/vda/blob/main/code/server/src/deploy.py" target="blank">
+                DeplyModel</a> lambda function to deploy the model</li>
+            <li>Other lambdas are used by state machine to check training/deployment status and subsequently wait till
+              they reach finish status</li>
+          </ul>
+          <div class="mlo-sample-img mtop-10">
+            <img src="img/mlo/lambda.png" alt="" style="height:500px;">
+          </div>
+          <h5 class="mtop-20">Conclusion</h5>
+          <p>In this article we saw how cloud services can be efficiently used to automate MLOps workflows. We can
+            easily build & scale ML workflows and we can as reuse the same architechture for some other computer vision
+            workflow. The scalability and reusablity this architecture can be attributed to following:</p>
+          <ul class="f3rem">
+            <li>Segregation of task & responsibilities and using right services for right jobs</li>
+            <li>Sagemaker does the ML heavy lifting</li>
+            <li>Lamda provides serverless backend</li>
+            <li>API Gateway handles REST middleware</li>
+            <li>S3 serves as web server</li>
+            <li>Dynamodb as data store for train and inference workflows</li>
+            <li>Congnito for user management and authentication</li>
+            <li>Step functions orchestrates the pipeline execution</li>
+            <li>Cloud Formation handles all infrastruture management</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </body>
-<script>
-  $(document).ready(function () {
-    //alert('load')
-    $('.dropdown-button').dropdown({
-      constrainWidth: false,
-      hover: true,
-      belowOrigin: true,
-      alignment: 'left'
-    });
-  });
-</script>
+
 
 </html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .nav-container {
+    background-color: #0D47A1;
+  }
+
+  .nav {
+    display: flex;
+    max-width: 1080px;
+    margin: auto;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 1.2rem;
+    justify-content: space-between;
+  }
+
+  .list,
+  .mlist {
+    list-style-type: none;
+  }
+
+  .item {
+    float: left;
+    padding: 10px;
+    margin-right: 10px;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .active {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .content-container {
+    max-width: 600px;
+    margin-top: 5px;
+    margin: auto;
+  }
+
+  div.img {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  div.img img {
+    height: 200px;
+    width: 200px;
+  }
+
+  .btn {
+    height: 50px;
+    width: 200px;
+    background-color: #0D47A1;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  div.result p {
+    font-size: 2rem;
+    color: green;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .file {
+    background-color: #0D47A1;
+    display: none;
+  }
+
+  .border {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #0D47A1;
+  }
+
+  .lcont {
+    display: flex;
+  }
+
+  .key,
+  .value {
+    width: 200px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    color: #031530;
+  }
+
+  .value {
+    width: 310px;
+    justify-content: left;
+  }
+
+  .mlist {
+    font-size: 1.3rem;
+  }
+
+  .settings-cont {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    color: #031530;
+  }
+
+  input[type='text'] {
+    width: 400px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .scont {
+    margin-top: 10px;
+  }
+
+  input {
+    margin-top: 2px;
+  }
+
+  /* label {
+    display: block;
+    width: 100px;
+  } */
+</style>
+
+<body>
+  <div class="body-container">
+    <div class="nav-container">
+      <div class="nav">
+        <div class="logo">VDA</div>
+        <div class="menu">
+          <ul class="list">
+            <li class="item active">Detect</li>
+            <li class="item">Retrain</li>
+            <li class="item">Settings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- DETECT STARTS -->
+  <div class="content-container hide">
+    <div class="img">
+      <img src="img/mlo/1.png" alt="">
+    </div>
+    <div>
+      <button class="btn">SELECT IMAGE</button>
+    </div>
+    <div style="margin-top:15px">
+      <button class="btn">DETECT</button>
+    </div>
+    <div class="result">
+      <p>Vehicle detected successfully!!!</p>
+      <p>Confidence score = 98.34%</p>
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="img">
+      <img src="img/mlo/2.png" alt="">
+    </div>
+    <div>
+      <button class="btn">SELECT IMAGE</button>
+    </div>
+    <div style="margin-top:15px">
+      <button class="btn">DETECT</button>
+    </div>
+    <div class="result">
+      <p>*** No vehicle found. ***</p>
+      <p>Confidence score = 94.76%</p>
+    </div>
+  </div>
+  <!-- DETECT ENDS -->
+
+  <!-- RETRAIN STARTS -->
+  <div class="content-container hide">
+    <ul class="mlist">
+      <li class="mitem">
+        <div class="lcont">
+          <div class="key border">Model Name</div>
+          <div class="value border">Model - 1</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Train Date</div>
+          <div class="value border">Nov 21, 2022 09:30:45 AM</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Train Data Location</div>
+          <div class="value border">s3//somebucket1/somedir1/train/</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Validation Accuracy</div>
+          <div class="value border">81.03%</div>
+        </div>
+      </li>
+      <li class="mitem"></li>
+      <li class="mitem"></li>
+    </ul>
+    <ul class="mlist">
+      <li class="mitem">
+        <div class="lcont">
+          <div class="key border">Model Name</div>
+          <div class="value border">Model - 2</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Train Date</div>
+          <div class="value border">Nov 21, 2022 09:30:45 AM</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Train Data Location</div>
+          <div class="value border">s3//somebucket2/somedir2/train/</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Validation Accuracy</div>
+          <div class="value border">92.67%</div>
+        </div>
+      </li>
+      <li class="mitem"></li>
+      <li class="mitem"></li>
+    </ul>
+    <ul class="mlist">
+      <li class="mitem">
+        <div class="lcont">
+          <div class="key border">Model Name</div>
+          <div class="value border">Model - 3</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Train Date</div>
+          <div class="value border">Oct 09, 2022 19:04:45 AM</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Train Data Location</div>
+          <div class="value border">s3//somebucket3/somedir3/train3/</div>
+        </div>
+        <div class="lcont">
+          <div class="key border">Validation Accuracy</div>
+          <div class="value border">95.70%</div>
+        </div>
+      </li>
+      <li class="mitem"></li>
+    </ul>
+    <button class="btn" style="position:relative;left:30%">RETRAIN</button>
+  </div>
+  <!-- RETRAIN ENDS -->
+
+  <!-- SETTINGS STARTS -->
+  <div class="content-container settings-cont hide">
+    <div class="scont">Train data location</div>
+    <input type="text" class="text" value="s3://vda-ap-south-1/vda-data/train/ ">
+    <div class="scont">Instance type</div>
+    <input type="text" class="text" value="ml.p2.xlarge ">
+    <div class="scont">Num epochs</div>
+    <input type="text" class="number" value="128 ">
+    <div class="scont">Learning rate</div>
+    <input type="text" class="number" value="0.005">
+    <button class="btn" style="margin-top:20px; position:relative;left:15%">UPDATE</button>
+  </div>
+  <!-- SETTINGS ENDS -->
+</body>
+
+</html>
