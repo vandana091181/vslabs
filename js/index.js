@@ -6,32 +6,30 @@ async function loadNav() {
     constrainWidth: false,
     hover: true,
     belowOrigin: true,
-    alignment: "left",
+    alignment: "right",
   });
   return "loadNav loaded!!!";
 }
 
 async function loadBody(secUrl) {
-  let res = await fetch(secUrl);
+  let res = await loadNav();
+  res = await fetch(secUrl);
   let sec = await res.text();
   $("body").append($(sec));
   return "body loaded";
 }
 
 async function loadHomeAsync() {
-  let res = await loadNav();
   res = await loadBody("templ/index.html");
   return "loadHomeAsync done!!!";
 }
 
 async function loadDataEnggAsync() {
-  let res = await loadNav();
   res = await loadBody("templ/deg.html");
   return "loadDataEnggAsync loaded!!!";
 }
 
 async function loadMLOpsAsync() {
-  let res = await loadNav();
   res = await loadBody("templ/mlops.html");
   return "MLOps loaded!!!";
 }
