@@ -54,8 +54,8 @@ p {
 
 .code-cont {
   overflow-y: scroll;
-  width: 800px;
-  height: 300px; }
+  width: 1000px;
+  height: 500px; }
 
 .code-cont > pre > code {
   display: block;
