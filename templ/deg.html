@@ -185,7 +185,8 @@ inv_c = df.groupBy('InvoiceNo', 'InvoiceDate', 'year', 'month').agg(
     job.commit()
   </code>
       </pre>
-      <p class="top-20 f3rem">Glue job creates a 5 node spark cluster with G1.x instance type and max capacity of 5
+      <p class="top-20 f3rem">Glue job creates a 5 node spark cluster with G1.x instance type (4 vCPU, 16 GB RAM and 64
+        GB disk) and max capacity of 5
         DPUs. Cluster runs for 4+ hours to process the data transormations and aggregates them to s3</p>
       <img src="../img/deg/jobrun.png" alt="" class="mtop-10 job-img">
       <img src="../img/deg/sales_out.png" alt="" class="mtop-20 job-img2">
