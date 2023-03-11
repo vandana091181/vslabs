@@ -5,7 +5,11 @@
 .nav-container {
   background: black;
   color: white;
-  padding-bottom: 10px; }
+  padding-bottom: 10px; 
+  .logo-cont {
+    display: flex;
+  }
+}
 
 .card-image img {
   height: 250px;

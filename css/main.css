@@ -2,6 +2,8 @@
   background: black;
   color: white;
   padding-bottom: 10px; }
+  .nav-container .logo-cont {
+    display: flex; }
 
 .card-image img {
   height: 250px;

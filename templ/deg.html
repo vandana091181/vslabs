@@ -22,10 +22,8 @@
       </ul>
       <h5 class="mtop-10 f3rem">Data sits in a s3 bucket with following details:</h5>
       <img src="../img/deg/sales.png" alt="" class="mtop-10 s3-img">
-      <img src="../img/deg/gbsize2.png" alt="" class="mtop-10 s3-img">
       <p class="top-20 f3rem">Data is loaded to a glue notebook backed by a spark cluster showing following
         stats</p>
-      <img src="../img/deg/gluejob.png" alt="" class="mtop-10 s3g-img">
       <img src="../img/deg/gluejob.png" alt="" class="mtop-10 s3g-img">
       <p class="top-20 f3rem">Following <a
           href="https://github.com/vandana091181/pyspark-sales-etl/blob/main/sales-etl-job.py" target="blank">pyspark
@@ -187,8 +185,8 @@ inv_c = df.groupBy('InvoiceNo', 'InvoiceDate', 'year', 'month').agg(
     job.commit()
   </code>
       </pre>
-      <p class="top-20 f3rem">Glue job creates a 5 node spark cluster with G1.x instance type and max coapacity of 5
-        DPUs. Clsuter runs for 4+ hours to process the data transormations and aggregates them to s3</p>
+      <p class="top-20 f3rem">Glue job creates a 5 node spark cluster with G1.x instance type and max capacity of 5
+        DPUs. Cluster runs for 4+ hours to process the data transormations and aggregates them to s3</p>
       <img src="../img/deg/jobrun.png" alt="" class="mtop-10 job-img">
       <img src="../img/deg/sales_out.png" alt="" class="mtop-20 job-img2">
       <p class="top-20 f3rem">With aggregations in place we can now answer the analytics and reporting queries as
@@ -214,10 +212,10 @@ inv_c = df.groupBy('InvoiceNo', 'InvoiceDate', 'year', 'month').agg(
         <h4 class="f3rem mtop-20">
           Conclusion:
         </h4>
-        <p class="f3rem mtop-20">In this article we built a strategy to process annd analyze the data at scale, could
+        <p class="f3rem mtop-10">In this article we built a strategy to process annd analyze the data at scale, could
           platforms and open source technologies helps us to focus on our needs eliminating the need to maintain
           dedicated infrastrucure. Cloud managed services like AWS Glue, S3 etc makes it easy to provision and scale
-          clusters to handle any amount of data and enables users to "pay as use" billing model
+          clusters to handle any amount of data and enables users to "pay as you use" billing model
       </div>
     </div>
   </div>
