@@ -73,7 +73,7 @@ p {
   height: 500px;
 }
 
-.code-cont > pre > code {
+.code-cont > pre > code{
   display: block;
   background: none;
   white-space: pre;
@@ -93,5 +93,30 @@ p {
   .s3-img {
     height: 450px;
     width: 850px;
+  }
+
+  .s3g-img {
+    height: 550px;
+    width: 800px;
+  }
+
+  .glue-code {
+    display: block;
+    background: none;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    max-width: 80%;
+    min-width: 100px;
+    height: 500px;
+    padding: 0;
+  }
+  .job-img,  .job-img2{
+    height: 500px;
+  }
+  .job-img2 {
+    left: 30px;
+    position: relative;
+    display: block;
   }
 }
